@@ -5,6 +5,7 @@
 import express from "express";
 import { MongoClient } from "mongodb";
 import dotenv from 'dotenv';
+import {moviesRouter} from "./routes/movies.js";  
 
 dotenv.config();  // getting all env keys from here
 // console.log(process.env)
@@ -24,55 +25,15 @@ async function createConnection(){
   console.log("MongoDB Connector")
   return client;
 }
-const client = await createConnection(); //allowed only in "type":"module"
+export const client = await createConnection(); //allowed only in "type":"module"
 // const PORT =9001;
 const PORT = process.env.PORT;  // port will be automatically assigned by heroku 
 app.get("/",(request,response)=>{
     response.send("Hello ,🌏😍😍");
 })
 
-app.get("/movies",async(request,response)=>{
-    console.log(request.query);
-    const{language,rating} = request.query;
-  
-    const filter = request.query;
-
-    //To change the rating to number
-    if(filter.rating){
-      filter.rating = +(filter.rating)
-    }
-    const movies = await client
-    .db("b251we")
-    .collection("movies")
-    .find(filter)
-    .toArray();
-    console.log(movies);
-    
-    response.send(movies)
-});
-
-app.get("/movies/:id",async(request,response)=>{
-    const {id} = request.params;
-
-    // db.movies.findOne({"id":"105"})
-    const movie = await client.db("b251we").collection("movies").findOne({"id":id});
-    console.log(movie);
-  
-    movie ?  response.send(movie) : response.status(404).send({msg : "Movie not found 😭"});
-});
-
-//POST Method
-app.post("/movies",async(request,response)=>{
-
-  const data = request.body;
-  console.log("Incoming movies",data)
-
-  const result = await client
-    .db("b251we")
-    .collection("movies")
-    .insertMany(data);
-
-  response.send(result)
-});
+app.use("/movies",moviesRouter);  // Whenever movies is coming, it will be routed to moviesRouter
 
 app.listen(PORT,()=>console.log('The server is started at',PORT));
+
+
