@@ -25,7 +25,8 @@ async function createConnection(){
   return client;
 }
 const client = await createConnection(); //allowed only in "type":"module"
-const PORT =9001;
+// const PORT =9001;
+const PORT = process.env.PORT;  // port will be automatically assigned by heroku 
 app.get("/",(request,response)=>{
     response.send("Hello ,🌏😍😍");
 })
