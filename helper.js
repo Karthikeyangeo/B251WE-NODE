@@ -26,5 +26,10 @@ import { client } from "./index.js";
 async function deleteMovieByID(id) {
   return await client.db("b251we").collection("movies").deleteOne({ "id": id });
 }
+
+// update Movies by ID
+async function updateMovieByID(id,updatedMovie) {
+  return await client.db("b251we").collection("movies").updateOne({ "id": id },{$set:updatedMovie});
+}
   
-export {getMovies,getMovieByID,createMovies,deleteMovieByID};
+export {getMovies,getMovieByID,createMovies,deleteMovieByID,updateMovieByID};
