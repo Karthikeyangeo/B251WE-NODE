@@ -48,7 +48,11 @@ async function genPassword(password){
   console.log(hashedPassword);
   return hashedPassword;
 }
-  
+
+// get username
+async function getUserByName(username) {
+  return await client.db("b251we").collection("users").findOne({ username:username });
+}
 export {
   getMovies,
   getMovieByID,
@@ -56,5 +60,6 @@ export {
   deleteMovieByID,
   updateMovieByID,
   createUsers,
-  genPassword
+  genPassword,
+  getUserByName
 };
