@@ -8,15 +8,16 @@ import dotenv from 'dotenv';
 import {moviesRouter} from "./routes/movies.js";  
 import { usersRouter } from "./routes/users.js";
 import bcrypt from "bcrypt"; 
-
+import cors from 'cors';
 dotenv.config();  // getting all env keys from here
 // console.log(process.env)
 const app = express();
-
+app.use(cors());
 //Middleware concept
 //app.use -> Intercept every request
 
 app.use(express.json()); //Every request is parsed as JSon.
+
 
 
 const MONGO_URL = process.env.MONGO_URL;  // url hidden from git repo
