@@ -6,7 +6,7 @@ import {auth} from '../middleware/auth.js';
 
 router
     .route("/")
-    .get(auth,async(request,response)=>{
+    .get(async(request,response)=>{
         console.log(request.query);
         const{language,rating} = request.query;
     
@@ -33,7 +33,7 @@ router
 
 router
     .route("/:id")
-    .get(auth,async(request,response)=>{
+    .get(async(request,response)=>{
         //get by ID
         const {id} = request.params;
 
