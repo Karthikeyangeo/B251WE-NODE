@@ -13,6 +13,7 @@ import bcrypt from "bcrypt";
 
 // get Movies by ID
  async function getMovieByID(id) {
+  // ObjectID function is used to change the id to object ID 
     return await client.db("b251we").collection("movies").findOne({ _id: ObjectId(id) });
   }
 
