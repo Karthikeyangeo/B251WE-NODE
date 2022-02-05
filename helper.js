@@ -21,7 +21,7 @@ import bcrypt from "bcrypt";
     return await client
       .db("b251we")
       .collection("movies")
-      .insertMany(data);
+      .insertOne(data);
   }
 
 // delete Movies by ID
