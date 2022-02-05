@@ -1,4 +1,5 @@
 import { client } from "./index.js";
+import { ObjectId } from "mongodb";
 import bcrypt from "bcrypt"; 
 
 //get all movies
@@ -12,7 +13,7 @@ import bcrypt from "bcrypt";
 
 // get Movies by ID
  async function getMovieByID(id) {
-    return await client.db("b251we").collection("movies").findOne({ "id": id });
+    return await client.db("b251we").collection("movies").findOne({ _id: ObjectId(id) });
   }
 
 // Add movies
@@ -25,12 +26,12 @@ import bcrypt from "bcrypt";
 
 // delete Movies by ID
 async function deleteMovieByID(id) {
-  return await client.db("b251we").collection("movies").deleteOne({ "id": id });
+  return await client.db("b251we").collection("movies").deleteOne({ _id: ObjectId(id) });
 }
 
 // update Movies by ID
 async function updateMovieByID(id,updatedMovie) {
-  return await client.db("b251we").collection("movies").updateOne({ "id": id },{$set:updatedMovie});
+  return await client.db("b251we").collection("movies").updateOne({ _id: ObjectId(id) },{$set:updatedMovie});
 }
 
 // Create Movies

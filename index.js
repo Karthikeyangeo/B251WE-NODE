@@ -12,6 +12,7 @@ import cors from 'cors';
 dotenv.config();  // getting all env keys from here
 // console.log(process.env)
 const app = express();
+//third party middleware
 app.use(cors());
 //Middleware concept
 //app.use -> Intercept every request
